@@ -1,7 +1,7 @@
 import argparse, struct
 
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 from math import log, exp, sqrt, pi
 
@@ -10,10 +10,10 @@ train_label_path = './train-labels-idx1-ubyte'
 test_image_path = './t10k-images-idx3-ubyte'
 test_label_path = './t10k-labels-idx1-ubyte'
 
-def showBytesImage(byte, row=28, col=28):
+'''def showBytesImage(byte, row=28, col=28):
     im = [[byte[i * 28 + j] for j in range(col)] for i in range(row)]
     plt.imshow(im, cmap='gray')
-    plt.show()
+    plt.show()'''
 
 def read_file(path, type):
     if type == 'image':
@@ -38,8 +38,11 @@ def show_result(Posterior, Label, Result, Mode):
             error +=1
         print(f'Prediction: {predict}, Ans: {Label[index]}\n')
 
+    print("Imagination of numbers in Bayesian classifier:\n")
+
     if Mode == 'Discrete':
-        for label in range(len(Label)):
+        for label in range(len(Result)):
+            print(f'{label}:')
             row = ''
             for pixel in range(784):
                 if pixel % 28 == 0:
@@ -50,7 +53,8 @@ def show_result(Posterior, Label, Result, Mode):
                     print(row)
             print()
     elif Mode == 'Continuous':
-        for label in range(len(Label)):
+        for label in range(len(Result)):
+            print(f'{label}:')
             row = ''
             for pixel in range(784):
                 if pixel % 28 == 0:
