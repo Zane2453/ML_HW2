@@ -123,9 +123,8 @@ def Naive_Bayes_Continuous(train_images, train_labels, test_images, test_labels)
             for pixel in range(Pixel_num):
                 if Gaussian[label]['variance'][pixel] <= log_zero:
                     #Posterior[index][label] += log(float(log_zero))
-                    continue
-                else:
-                    Posterior[index][label] += (((test_images[index][pixel] - Gaussian[label]['mean'][pixel]) ** 2) / (2 * Gaussian[label]['variance'][pixel]) * -1) - log(sqrt(2*pi*Gaussian[label]['variance'][pixel]))
+                    Gaussian[label]['variance'][pixel] = log_zero
+                Posterior[index][label] += (((test_images[index][pixel] - Gaussian[label]['mean'][pixel]) ** 2) / (2 * Gaussian[label]['variance'][pixel]) * -1) - log(sqrt(2*pi*Gaussian[label]['variance'][pixel]))
 
     show_result(Posterior, test_labels, Gaussian, 'Continuous')
 
